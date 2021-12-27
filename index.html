@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Stop watch</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <h2>Stop Watch</h2>
+    <div id="border">
+        <p> <span id="minutes">00</span> :
+            <span id="seconds">00</span>
+        </p>
+        <div id=buttons>
+            <button type="button" id="start">Start</button>
+            <button type="button" id="stop">Stop</button>
+            <button type="button" id="reset">Reset</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        var msec = 0;  // milli-seconds
+        var sec = 0;   // seconds
+        var pause;
+        var stopSec = document.getElementById("seconds");
+
+        var stopMin = document.getElementById("minutes");
+        // start button
+        var start = document.getElementById("start");
+        start.addEventListener('click', Interval);
+        // stop button
+        var stop = document.getElementById("stop");
+        stop.addEventListener('click', function () {
+            clearInterval(pause);
+        });
+        // reset button
+        var reset = document.getElementById("reset");
+        reset.addEventListener('click', function () {
+            clearInterval(pause);
+              msec=0;
+              sec=0;
+              stopSec.textContent="00";
+              stopMin.textContent="00";
+        });
+        // Timer Count
+        function startTimer() {
+            msec++;
+            if (msec < 10) {
+                stopSec.textContent = "0" + msec;
+            }
+            if (msec < 100) {
+                stopSec.textContent = msec;
+            }
+            if (msec > 99) {
+                sec++;
+                if (sec < 10) {
+                    stopMin.textContent = "0" + sec;
+                    msec = 0;
+                }
+                else {
+                    stopMin.textContent = sec;
+                    msec = 0;
+                }
+        }}
+        // for stopping Interval
+        function Interval() {
+        pause = setInterval(startTimer, 10);
+        }
+
+    </script>
+</body>
+
+</html>
